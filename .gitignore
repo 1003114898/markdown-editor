@@ -1,0 +1,27 @@
+# Wails bin directory
+build/bin
+# Wails Windows NSIS support files
+build/windows/installer/wails_tools.nsh
+build/windows/installer/tmp/
+
+# 本地打包取用点，不入库
+dist/
+
+# WorkBuddy 项目数据（本地）
+.workbuddy/
+
+# GitHub 推送凭据，切勿提交
+.git-token
+
+# IDEs
+.idea
+.vscode
+
+# 系统与临时文件
+Thumbs.db
+.DS_Store
+*.tmp
+*.log
+
+# The black hole that is...
+node_modules

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Markdown 编辑器</title>
+    <link href="/main.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="app">
+    <header class="toolbar">
+        <div class="brand"><img alt="" class="brand-icon" src="/icon.svg"/></div>
+
+        <div class="actions">
+            <button id="btn-new" title="新建 (Ctrl+N)" type="button">新建</button>
+            <button id="btn-open" title="打开 (Ctrl+O)" type="button">打开</button>
+            <button id="btn-save" title="保存 (Ctrl+S)" type="button">保存</button>
+            <button id="btn-save-as" title="另存为 (Ctrl+Shift+S)" type="button">另存为</button>
+            <span class="tool-sep"></span>
+            <button id="btn-export" title="导出为独立 HTML 文件" type="button">导出 HTML</button>
+            <span class="tool-sep"></span>
+            <button id="btn-find" title="查找 (Ctrl+F)" type="button">查找</button>
+            <button id="btn-outline" title="显示或隐藏标题目录" type="button">目录</button>
+            <button id="btn-help" title="打开 Markdown 语法示例 (F1)" type="button">帮助</button>
+        </div>
+
+        <div class="view-switch" id="view-switch">
+            <button class="active" data-view="split" type="button">分栏</button>
+            <button data-view="edit" type="button">编辑</button>
+            <button data-view="preview" type="button">预览</button>
+        </div>
+
+        <div class="prefs">
+            <select id="font-size" title="字号">
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="16">16</option>
+                <option value="18">18</option>
+            </select>
+            <button id="btn-theme" title="切换深色 / 浅色主题" type="button">深色</button>
+        </div>
+    </header>
+
+    <div class="findbar" id="findbar" hidden>
+        <input autocomplete="off" id="find-input" placeholder="查找" spellcheck="false" type="text"/>
+        <button aria-pressed="false" class="find-opt" id="find-regex" title="正则表达式：开启后查找框按正则解析，替换框可用 $1 等反向引用" type="button">.*</button>
+        <button aria-pressed="false" class="find-opt" id="find-case" title="区分大小写" type="button">Aa</button>
+        <span class="find-count" id="find-count">0 / 0</span>
+        <button id="find-prev" title="上一个 (Shift+Enter)" type="button">上一个</button>
+        <button id="find-next" title="下一个 (Enter)" type="button">下一个</button>
+        <span class="replace-group" id="replace-group">
+            <input autocomplete="off" id="replace-input" placeholder="替换为" spellcheck="false" type="text"/>
+            <button id="replace-one" type="button">替换</button>
+            <button id="replace-all" type="button">全部替换</button>
+        </span>
+        <button class="find-close" id="find-close" title="关闭 (Esc)" type="button">×</button>
+    </div>
+
+    <div class="tabbar" id="tabbar"></div>
+
+    <div class="body-row">
+        <aside class="outline" id="outline" hidden>
+            <div class="outline-title">目录</div>
+            <div class="outline-list" id="outline-list"></div>
+        </aside>
+
+        <main class="workspace" data-view="split" id="workspace">
+            <section class="pane editor-pane">
+                <textarea autocomplete="off" autocorrect="off" id="editor" spellcheck="false" wrap="soft"></textarea>
+            </section>
+            <div class="divider" id="divider" title="拖动调整宽度"></div>
+            <section class="pane preview-pane" id="preview-pane">
+                <article class="markdown-body" id="preview"></article>
+            </section>
+        </main>
+    </div>
+
+    <footer class="statusbar">
+        <span id="status-message">就绪</span>
+        <span class="spacer"></span>
+        <span id="status-file">未命名.md</span>
+        <span class="dirty" id="status-dirty"></span>
+        <span id="status-count">0 字 · 1 行</span>
+    </footer>
+</div>
+<script src="/main.js"></script>
+</body>
+</html>
