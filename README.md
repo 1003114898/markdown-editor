@@ -56,6 +56,13 @@ A lightweight Windows Markdown editor built with Go and Wails v2. The frontend i
 
 ## 从源码构建
 
+### 获取源码
+
+```bash
+git clone https://github.com/1003114898/markdown-editor.git
+cd markdown-editor
+```
+
 ### 环境要求
 
 | 组件 | 版本 |
