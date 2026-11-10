@@ -2,9 +2,41 @@
 
 一个 Windows 桌面 Markdown 编辑器。用 Go + Wails v2 写成，前端是纯 HTML / CSS / JavaScript，没有 npm 依赖，也没有前端构建步骤。
 
+**单个 exe，15,581,696 字节（约 14.9 MiB）。** 不打包 Chromium，不附带 DLL，不需要安装，下载即用。
+
 A lightweight Windows Markdown editor built with Go and Wails v2. The frontend is plain HTML/CSS/JS with no npm dependencies.
 
 > 本项目面向 Windows，依赖系统已安装的 WebView2 Runtime（Windows 11 一般自带）。目前只在 Windows 11 上完成构建与运行验证。
+
+## 下载
+
+到 [Releases](https://github.com/1003114898/markdown-editor/releases) 下载 `markdown.exe`，双击运行。
+
+| 项目 | 数值 |
+| --- | --- |
+| 文件 | `markdown.exe`，单文件，无随包目录 |
+| 大小 | 15,581,696 字节 ≈ 14.9 MiB |
+| SHA-256 | `309385dc9a3f7258f4da33bc419ee5f96d70d39efa1380c7100e5808b9018a98` |
+| 依赖 | 系统 WebView2 Runtime |
+
+用 PowerShell 校验：
+
+```powershell
+Get-FileHash .\markdown.exe -Algorithm SHA256
+```
+
+## 为什么这么小
+
+基于 Electron 的桌面编辑器会把整套 Chromium 渲染引擎打进安装包，这类安装包通常在数百 MB 量级。本程序不自带浏览器内核：
+
+- 界面交给系统 WebView2 渲染，不打包 Chromium
+- Go 静态编译，前端文件通过 `//go:embed` 打进二进制
+- 前端是原生 HTML / CSS / JS，没有框架、没有 `node_modules`、没有 npm 依赖
+- Markdown 渲染用 goldmark，没有引入 PDF 解析、OCR 或图像识别模型
+
+结果是 14.9 MiB 的一个文件。同类工具里这个体积属于极简一档。
+
+> 诚实边界：WebView2 Runtime 的体积**不在**这 14.9 MiB 里。它由系统提供，多个程序共用。Windows 11 一般已自带；如果系统没有，需要先安装微软的 WebView2 Runtime，那部分体积在百 MB 量级。这是把浏览器内核换成系统级依赖，不是把体积藏起来。精简系统首次运行可能失败，这一点省不掉。
 
 ## 功能一览
 
@@ -83,7 +115,7 @@ wails build
 
 `frontend/wailsjs/` 是 Wails 自动生成的 Go 方法绑定，构建时会刷新，不要手工修改。改完 Go 或前端源码后重新执行 `wails build` 即可。
 
-> 仓库只包含源码。构建产物、本地打包目录和会话草稿都不入库。
+> git 仓库只包含源码。编译好的 exe 在 [Releases](https://github.com/1003114898/markdown-editor/releases) 提供。构建产物、本地打包目录和会话草稿都不入库。
 
 ## 快捷键
 
