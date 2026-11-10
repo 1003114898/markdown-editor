@@ -8,6 +8,12 @@ A lightweight Windows Markdown editor built with Go and Wails v2. The frontend i
 
 > 本项目面向 Windows，依赖系统已安装的 WebView2 Runtime（Windows 11 一般自带）。目前只在 Windows 11 上完成构建与运行验证。
 
+## 界面示例
+
+![分栏编辑与实时预览](docs/screenshot.png)
+
+左侧写 Markdown，右侧实时预览。图中是按 `F1` 打开的内置语法示例文档。
+
 ## 下载
 
 到 [Releases](https://github.com/1003114898/markdown-editor/releases) 下载 `markdown.exe`，双击运行。
