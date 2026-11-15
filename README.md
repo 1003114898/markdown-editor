@@ -2,7 +2,7 @@
 
 一个 Windows 桌面 Markdown 编辑器。用 Go + Wails v2 写成，前端是纯 HTML / CSS / JavaScript，没有 npm 依赖，也没有前端构建步骤。
 
-**单个 exe，15,581,696 字节（约 14.9 MiB）。** 不打包 Chromium，不附带 DLL，不需要安装，下载即用。
+**单个 exe，15,583,744 字节（约 14.9 MiB）。** 不打包 Chromium，不附带 DLL，不需要安装，下载即用。
 
 A lightweight Windows Markdown editor built with Go and Wails v2. The frontend is plain HTML/CSS/JS with no npm dependencies.
 
@@ -16,13 +16,13 @@ A lightweight Windows Markdown editor built with Go and Wails v2. The frontend i
 
 ## 下载
 
-到 [Releases](https://github.com/1003114898/markdown-editor/releases) 下载 `markdown.exe`，双击运行。
+到 [Releases](https://github.com/1003114898/markdown-editor/releases) 下载 `markdown.exe`，双击运行。请选标有 **Latest** 的版本，旧版本只作历史留存。
 
 | 项目 | 数值 |
 | --- | --- |
 | 文件 | `markdown.exe`，单文件，无随包目录 |
-| 大小 | 15,581,696 字节 ≈ 14.9 MiB |
-| SHA-256 | `309385dc9a3f7258f4da33bc419ee5f96d70d39efa1380c7100e5808b9018a98` |
+| 大小 | 15,583,744 字节 ≈ 14.9 MiB |
+| SHA-256 | `b3817c1aa276637850c63bba1ad6ce530c4b6f2e7d0736e5402df6aa3b7c964c` |
 | 依赖 | 系统 WebView2 Runtime |
 
 用 PowerShell 校验：
@@ -65,7 +65,7 @@ Get-FileHash .\markdown.exe -Algorithm SHA256
 - 导出为带内联样式的独立 HTML 文件
 - 拖放文件到窗口打开
 - 文件关联与命令行打开：`markdown.exe path\to\file.md`
-- 单实例：程序已运行时再次打开文档，会在已有窗口新增标签，不再启动新进程
+- 单实例：程序已运行时再次打开文档，会先还原已有窗口并把它提到最上层，再新增标签，不启动新进程
 - 关闭窗口时若有未保存内容，弹出「全部保存 / 放弃修改 / 取消」
 - 会话恢复：编辑过程自动落盘草稿，下次启动恢复标签与内容
 

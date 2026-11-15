@@ -28,9 +28,11 @@ func main() {
 		// 编辑器的复制、粘贴、剪切、全选、撤销都靠它。必须显式开启。
 		EnableDefaultContextMenu: true,
 		// 程序已运行时，第二次双击文档把路径交给已有窗口，不再开新进程。
+		// Wails 只转发参数，不会激活已有窗口，所以要显式还原并提到最上层。
 		SingleInstanceLock: &options.SingleInstanceLock{
 			UniqueId: "workbuddy-markdown-editor-v1",
 			OnSecondInstanceLaunch: func(data options.SecondInstanceData) {
+				app.bringToFront()
 				app.pushPaths(data.Args)
 			},
 		},

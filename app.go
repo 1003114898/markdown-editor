@@ -282,6 +282,24 @@ func (a *App) ClearSession() {
 
 // -------------------------------------------------- 二次启动与拖放事件 ---
 
+// bringToFront 还原已有窗口并把它提到最上层。
+// Wails 的单实例回调只转发参数，不会激活窗口。窗口最小化或被别的窗口盖住时，
+// 用户会看到文档已打开、窗口却没出现。
+func (a *App) bringToFront() {
+	ctx := a.ctx
+	if ctx == nil {
+		return
+	}
+	// 同步还原最小化状态。WindowShow 内部的还原走 Invoke，是异步投递的。
+	runtime.WindowUnminimise(ctx)
+	// 显示窗口，并尝试设置前台窗口与焦点。
+	runtime.WindowShow(ctx)
+	// Windows 会拒绝后台进程调用 SetForegroundWindow。
+	// TOPMOST -> NOTOPMOST 会把窗口放到所有普通窗口之上，不依赖前台权限。
+	runtime.WindowSetAlwaysOnTop(ctx, true)
+	runtime.WindowSetAlwaysOnTop(ctx, false)
+}
+
 // pushPaths 把二次启动或拖放传入的文档读好，存进待取队列并通知前端。
 func (a *App) pushPaths(paths []string) {
 	files := findStartupFiles(paths)
